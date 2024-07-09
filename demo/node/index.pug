@@ -1,0 +1,20 @@
+extends layout.pug
+
+append content
+    div.title Bureau of Information
+    div.subtitle Intelligence Archives & Library
+    if error
+        div= error
+    div filter-value
+    form(method='GET' action='/library/')
+        div.form-group
+            input#filter.search(type='text', placeholder='Search document' name='filter', autocomplete='off')
+            button.button(type='submit') Search
+    div.document-list
+        if documents.length
+            each item in documents
+                a.document-entry(href='/library/document/' + item.id)
+                    div.document-entry-title= item.title
+                    div.date= item.date
+        else
+            div.no-documents No documents found.

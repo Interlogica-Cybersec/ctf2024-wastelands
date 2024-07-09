@@ -1,0 +1,2 @@
+<div style="text-align: justify;">There's a bunker relatively close to where we are. I heard it's inhabited by only one old man. Maybe we can convince him to let us in.
+The bunker is big, there's plenty of room for all of us. Plus we'll be gone in a matter of days.</div>

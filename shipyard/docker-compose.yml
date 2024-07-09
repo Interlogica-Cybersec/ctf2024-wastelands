@@ -1,0 +1,22 @@
+version: "3"
+services:
+  spring:
+    build:
+      context: server
+      dockerfile: ../Dockerfile.backend
+    networks:
+      - nginx
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "8580:8580"
+    networks:
+      - default
+      - nginx
+
+networks:
+  nginx:
+    internal: true

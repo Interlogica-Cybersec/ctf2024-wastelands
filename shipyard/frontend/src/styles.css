@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: elounda;
+  src: url(assets/Elounda-Regular.ttf);
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(assets/Roboto-Light.ttf);
+}
+
+body {
+  background: fixed;
+  background-image: url('assets/bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 100vw;
+}
+
+.sleek {
+  font-family: elounda;
+}
+
+.sleek * {
+  font-family: elounda;
+}
+
+.corporate {
+  font-family: roboto;
+}
+
+/*.corporate * {*/
+/*  font-family: roboto;*/
+/*}*/
+

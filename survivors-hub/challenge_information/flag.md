@@ -1,0 +1,1 @@
+NTRLGC{sh4r1ng_0d4yz_t0_fr13ndz_is_4lw4ys_FUN}

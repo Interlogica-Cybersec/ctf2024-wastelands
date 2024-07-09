@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <meta charset="UTF-8">
+    <title>Reactor Control Panel</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="body">
+<div class="header">
+    <div class="title">
+        Kilo-Reactor MK02
+    </div>
+    <div class="login" onclick="openLoginModal()">Login</div>
+</div>
+<div class="wrapper">
+    <div class="section-title">
+        Status:
+    </div>
+    <div class="section-value">
+        {% if started %}
+        Running
+        {% else %}
+        SCRAM emergency shutdown
+        {% endif %}
+    </div>
+
+    {% if not started %}
+    <div class="section-title">
+        Reason:
+    </div>
+    <div class="section-value">
+        Manual SCRAM
+    </div>
+    {% endif %}
+
+    <div class="section-title">
+        Energy output:
+    </div>
+    <div class="section-value">
+        {% if started %}
+        34.72 KILOWATT (97%)
+        {% else %}
+        0 KILOWATT (0%)
+        {% endif %}
+    </div>
+    <div class="section-title">
+        Reaction Type:
+    </div>
+    <div class="section-value">
+        Nuclear Fission
+    </div>
+    <div class="fission-section">
+        <div class="fission">
+            <svg class="collision-particles" style="fill:#fd5109;fill-opacity:0.246246;stroke-width:5;stroke-linejoin:round;stroke:#fd5109;stroke-opacity:1"
+                 viewBox="0 0 200 200"
+                 xmlns="http://www.w3.org/2000/svg">
+                <line x1="100" y1="120" x2="100" y2="180"/>
+                <line x1="90" y1="70" x2="75" y2="10"/>
+                <line x1="120" y1="120" x2="180" y2="180"/>
+                <line x1="80" y1="110" x2="10" y2="140"/>
+                <line x1="130" y1="100" x2="190" y2="100"/>
+            </svg>
+            <div class="neutron"></div>
+            <div class="full-atom">
+                <div class="full-atom-neutron atom-neutron-1"></div>
+                <div class="full-atom-neutron atom-neutron-2"></div>
+                <div class="full-atom-neutron atom-neutron-3"></div>
+                <div class="full-atom-neutron atom-neutron-4"></div>
+                <div class="full-atom-neutron atom-neutron-5"></div>
+                <div class="full-atom-neutron atom-neutron-6"></div>
+                <div class="full-atom-neutron atom-neutron-7"></div>
+            </div>
+        </div>
+    </div>
+    <div class="section-title">
+        Fuel Type:
+    </div>
+    <div class="section-value">
+        Thorium 232 - Uranium 233
+    </div>
+    <div class="atom-section">
+        <div class="atom">
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
+            <div class="orbit orbit-4"></div>
+            <div class="orbit orbit-5"></div>
+            <div class="nuclei nucleus-1"></div>
+            <div class="nuclei nucleus-2"></div>
+            <div class="nuclei nucleus-3"></div>
+            <div class="nuclei nucleus-4"></div>
+            <div class="nuclei nucleus-5"></div>
+        </div>
+    </div>
+    <div class="hidden">
+        <a href="/gl34tch">DV Cyber Security</a>
+    </div>
+</div>
+<div id="loginModalWrapper" class="modal-wrapper hidden">
+    <div class="modal">
+        <div class="modal-header">Login</div>
+        <form id="loginForm" class="form-2">
+            <div class="form-input-section">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="fill">
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="fill">
+
+                <input type="hidden" id="systemId" name="systemId" value="1337">
+            </div>
+            <div class="form-buttons-section">
+                <button type="button" onclick="closeLoginModal()" class="fill">Cancel</button>
+                <button type="submit" class="fill">Submit</button>
+            </div>
+        </form>
+        <div id="message" class="message hidden"></div>
+
+    </div>
+</div>
+<script>
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(loginForm);
+
+        fetch('/control-panel/api/login', {
+            method: 'POST',
+            body: formData
+        })
+        .then(async response => {
+            username.value = ''
+            password.value = ''
+            return {data: await response.json(), status: response.status}
+        })
+        .then(({data, status}) => {
+            if (status !== 200) {
+                throw data.error
+            }
+            location = 'control-panel/maintenance'
+        })
+        .catch(error => {
+            message.classList.remove('hidden')
+            message.innerText = error || ''
+        });
+    });
+
+    function closeLoginModal() {
+        loginModalWrapper.classList.add('hidden')
+    }
+
+    function openLoginModal() {
+        username.value = ''
+        password.value = ''
+        message.innerText = ''
+        loginModalWrapper.classList.remove('hidden')
+    }
+</script>
+</body>
+</html>

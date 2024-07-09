@@ -1,0 +1,59 @@
+.left-neon-animation {
+    animation: left-neon-startup 6s linear forwards;
+}
+
+.right-neon-animation {
+    animation: right-neon-startup 6s linear forwards;
+}
+
+.top-neon-animation {
+    animation: top-neon-startup 6s linear forwards;
+}
+
+.buttons-animation {
+    animation: buttons-startup 6s linear forwards;
+}
+
+@keyframes left-neon-startup {
+    0% {opacity: 0;}
+    19% {opacity: 0;}
+    20% {opacity: 1;}
+    21% {opacity: 0;}
+    24% {opacity: 0;}
+    25% {opacity: 1;}
+    26% {opacity: 0;}
+    29% {opacity: 0;}
+    30% {opacity: 1;}
+    31% {opacity: 0;}
+    40% {opacity: .3;}
+    60% {opacity: .6;}
+    80% {opacity: .9;}
+    100% {opacity: 1;}
+}
+
+@keyframes right-neon-startup {
+    0% {opacity: 0;}
+    19% {opacity: 0;}
+    30% {opacity: 1;}
+    31% {opacity: 0;}
+    34% {opacity: 0;}
+    35% {opacity: 1;}
+    36% {opacity: 0;}
+    39% {opacity: 0;}
+    40% {opacity: 1;}
+    41% {opacity: 0;}
+    50% {opacity: .3;}
+    60% {opacity: .6;}
+    80% {opacity: .9;}
+    100% {opacity: 1;}
+}
+
+@keyframes top-neon-startup {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes buttons-startup {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}

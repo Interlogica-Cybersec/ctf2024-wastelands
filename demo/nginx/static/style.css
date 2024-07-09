@@ -1,0 +1,131 @@
+@font-face {
+    font-family: neuropol;
+    src: url(Neuropol.otf);
+}
+
+* {
+    font-family: neuropol;
+}
+
+body {
+    letter-spacing: .1rem;
+    background: fixed;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-width: 100vw;
+    min-height: 100vh;
+    color: #eee;
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.wrapper {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border: .125rem white solid;
+    background: #000000bb;
+    padding: 2rem;
+    align-items: stretch;
+}
+
+.rules * {
+    font-family: monospace;
+}
+
+.rules {
+    max-width: 50rem;
+    max-height: 20rem;
+    overflow-y: auto;
+    font-family: monospace;
+    border: .125rem white solid;
+    padding: .5rem;
+    margin-bottom: .5rem;
+}
+
+.rules p {
+    font-size: 1rem;
+}
+
+.discord {
+    height: 1rem;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.subtitle {
+    text-align: center;
+    color: #ccc;
+}
+
+.rules-title {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.info {
+    text-align: justify;
+    margin-top: 1rem;
+    font-size: .75rem;
+    max-width: 50rem;
+}
+
+.button {
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.search {
+    flex-grow: 1;
+    padding: .5rem;
+}
+
+.header {
+    position: sticky;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: #000000bb;
+    border-bottom: .125rem white solid;
+}
+
+.footer {
+    text-align: center;
+    font-size: .75rem;
+    padding: .5rem;
+    background: #000000bb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: white;
+}
+
+.page-footer-chunk {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+.centered {
+    text-align: center;
+}
+
+.highlighted {
+    color: red;
+}

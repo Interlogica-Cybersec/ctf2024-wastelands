@@ -1,0 +1,1 @@
+NTRLGC{sh4r1ng_1s_c4r1ng}

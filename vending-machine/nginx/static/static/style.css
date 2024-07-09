@@ -1,0 +1,129 @@
+@font-face {
+    font-family: alienrobot;
+    src: url(AlienRobot.ttf);
+}
+
+body {
+    font-family: alienrobot;
+    margin: 0;
+    position: relative;
+    background: black;
+}
+
+button {
+    font-family: alienrobot;
+}
+
+.interactive {
+    aspect-ratio: 16/9;
+    color: red;
+    position: absolute
+}
+
+.hoverable {
+    transform-origin: 200px 20px;
+    filter: invert(.25);
+    opacity: .35;
+    transform: rotate(30deg);
+}
+
+.hoverable:hover {
+    filter: none;
+    cursor: pointer;
+    opacity: .5;
+}
+
+.top-bar {
+    transform: scaleY(0);
+}
+
+.top-bar-animation {
+    animation: topbar 14s linear forwards;
+}
+
+.bottom-bar {
+    transform: scaleY(0);
+}
+
+.bottom-bar-animation {
+    animation: bottombar 14s linear forwards;
+    transform-origin: bottom left;
+}
+
+@keyframes topbar {
+    0% {transform: scaleY(0); opacity: 0;}
+    20% {transform: scaleY(1); opacity: 1;}
+    80% {transform: scaleY(1); opacity: 1;}
+    100% {transform: scaleY(0); opacity: 0;}
+}
+
+@keyframes bottombar {
+    0% {transform: scaleY(0); opacity: 0;}
+    20% {transform: scaleY(1); opacity: 1;}
+    80% {transform: scaleY(1); opacity: 1;}
+    100% {transform: scaleY(0); opacity: 0;}
+}
+
+@keyframes startup {
+    0% {opacity: 1;}
+    20% {opacity: .9;}
+    40% {opacity: .8;}
+    60% {opacity: .6;}
+    80% {opacity: .3;}
+    100% {opacity: 0;}
+}
+
+.modal-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00000044;
+    pointer-events: none;
+}
+
+.modal {
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    border: #fff .125rem solid;
+    background: #00000084;
+    color: #fff;
+}
+
+.modal-big {
+    width: 42rem;
+}
+
+.modal a {
+    color: #fff;
+}
+
+.modal-header {
+    padding: 1rem;
+    border-bottom: #fff .125rem solid;
+}
+
+.modal-content {
+    display: flex;
+    padding: 1rem;
+}
+
+.modal-buttons {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-around;
+}
+
+.modal-buttons button {
+    padding: .5rem 1rem;
+}
+
+.hidden {
+    display: none;
+}

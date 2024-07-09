@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Image on Page Load with Audio</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+  @font-face {
+      font-family: neuropol;
+      src: url(Neuropol.otf);
+  }
+
+  * {
+      font-family: neuropol;
+  }
+
+  .bg {
+    background-image: url('library.png');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .animated-image {
+    position: absolute;
+    top: -600px; 
+    left: 0;
+    right: 0;
+    margin: auto; 
+    width: 300px; 
+    height: 600px; 
+    background-image: url('machinegun.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+  }
+
+	#modal {
+	  position: fixed;
+	  top: 20%;         
+	  left: 0;          
+	  right: 0;         
+	  margin: auto;     
+	  width: 30%;       
+	  background: rgba(0,0,0,0.8); 
+	  color: white;     
+	  border: 2px solid white; 
+	  padding: 20px;
+	  text-align: center;
+	  z-index: 100;
+	}
+
+</style>
+</head>
+<body>
+<div id="modal">
+  <p>Sound?</p>
+  <button onclick="startAnimation(true)">Yes</button>
+  <button onclick="startAnimation(false)">No</button>
+</div>
+
+<div class="bg"></div>
+<div class="animated-image" id="animatedImage"></div>
+<div class="overlay" id="overlay"></div>
+
+<script>
+  function startAnimation(playSound) {
+    document.getElementById('modal').style.display = 'none';
+    if (playSound) {
+      var audio = new Audio('machinegun.mp3');
+      audio.play();
+    }
+
+    var image = document.getElementById('animatedImage');
+    var overlay = document.getElementById('overlay');
+    var position = -600; 
+    var endPosition = 0;
+    var duration = 4000;
+    var startTime = null;
+
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      var timeElapsed = currentTime - startTime;
+      var nextPosition = position + (timeElapsed / duration) * (endPosition - position);
+
+      if (nextPosition < endPosition) {
+        image.style.top = nextPosition + 'px';
+        requestAnimationFrame(animation);
+      } else {
+        image.style.top = endPosition + 'px';
+        fadeToRed();
+      }
+    }
+    requestAnimationFrame(animation);
+	
+	function fadeToRed() {
+	  overlay.style.display = 'block';
+	  var opacityLevels = [0.2, 0.4, 0.6, 0.8];
+	  var index = 0;
+
+	  function increaseOpacity() {
+		if (index < opacityLevels.length) {
+		  overlay.style.opacity = opacityLevels[index];
+		  index++;
+		  document.querySelector('.animated-image').style.backgroundImage = "url('machinegun2.png')";
+		  setTimeout(function() {
+			document.querySelector('.animated-image').style.backgroundImage = "url('machinegun.png')";
+		  }, 100);
+		  setTimeout(increaseOpacity, 200);
+		} else {
+		  setTimeout(showFlag, 200);
+		}
+	  }
+
+	  setTimeout(increaseOpacity, 200);
+	}
+
+    function showFlag() {
+      var messageDiv = document.createElement('div');
+      messageDiv.style.width = '100%';
+      messageDiv.style.height = '50vh'; 
+      messageDiv.style.display = 'flex';
+      messageDiv.style.justifyContent = 'center';
+      messageDiv.style.alignItems = 'center';
+      messageDiv.style.position = 'absolute';
+      messageDiv.style.top = '25%'; 
+      messageDiv.style.left = '0';
+      messageDiv.style.zIndex = '20';
+
+      var message = document.createElement('h1');
+      message.textContent = "NTRLGC{S33_Y4_0N_JULY_5TH}";
+      message.style.color = 'white'; 
+      message.style.textAlign = 'center';
+
+      messageDiv.appendChild(message);
+      document.body.appendChild(messageDiv);
+	  
+    }
+  }
+</script>
+</body>
+</html>

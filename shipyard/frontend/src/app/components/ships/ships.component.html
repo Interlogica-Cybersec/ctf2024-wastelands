@@ -1,0 +1,34 @@
+<div class="bg-white min-h-screen mx-32 px-8 py-16 corporate">
+  <app-logo></app-logo>
+  <div class="flex gap-6 content-center mt-2">
+  <div class="text-3xl my-2 font-bold corporate">List of ships available for rental</div>
+  <input class="border-2 border-black p-1 my-2" [(ngModel)]="filterText" (ngModelChange)="onFilterChange()"
+         type="text" placeholder="Filter">
+  </div>
+  <ng-container *ngIf="filteredShips$ | async as ships">
+    <div *ngFor="let ship of ships">
+      <div class="text-xl font-bold mt-4 flex gap-2 flex-col corporate">
+        <div>{{ ship.name }}</div>
+        <div class="flex gap-2 text-sm corporate">
+          Transponder status:
+          <div *ngIf="ship.online" class="text-green-700 corporate">ONLINE</div>
+          <div *ngIf="!ship.online" class="text-red-700 corporate">OFFLINE</div>
+        </div>
+      </div>
+      <div class="flex mt-2 mb-8 gap-4 p-4 border-2 border-gray-600 bg-gray-200 items-start">
+        <div class="flex flex-col flex-shrink-0 border-2 border-black bg-white p-2">
+          <img class="w-56 h-56 border-2 border-black" [ngSrc]="ship.image" [alt]="ship.name" [width]="1024"
+               [height]="1024" priority>
+          <span class="text-center text-sm text-gray-700 mt-1">{{ ship.name }}</span>
+        </div>
+        <div class="text-justify corporate">{{ ship.description }}</div>
+      </div>
+    </div>
+    <div *ngIf="ships.length == 0">
+      <div class="text-xl font-bold mt-4 flex gap-2 flex-col corporate">
+        No ship found.
+      </div>
+    </div>
+  </ng-container>
+
+</div>

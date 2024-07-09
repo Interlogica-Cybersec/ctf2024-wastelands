@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Terminal</title>
+</head>
+<body>
+<div class="container">
+    <div class="stdout">
+        {% set banner_rows = banner.split('\n') %}
+        {% for row in banner_rows %}
+        <div class="line">{{row}}</div>
+        {% endfor %}
+        {% if flag %}
+        <div class="line">________________________________________________________________________________</div>
+        <div class="line"></div>
+        <div class="line">DOOR UNLOCKED. PUSH TO OPEN</div>
+        <div class="line"></div>
+        <div class="line">{{flag}}</div>
+        {% endif %}
+    </div>
+
+    <div class="stdin" onselectstart="return false;">
+        <span>></span>
+        <span id="field" contenteditable="" spellcheck="false"></span>
+    </div>
+</div>
+<script>
+    const stdout = document.querySelector('.stdout');
+    // const field = document.querySelector('#field');
+    const container = document.querySelector('.container');
+    var cmdHistory = []
+    var cmdHistoryIndex = []
+
+    function run(cmd) {
+        if (cmd.trim()) {
+            cmdHistory.push(cmd)
+            cmdHistoryIndex = cmdHistory.length
+        }
+        return fetch('/cmd', {
+            method: 'POST',
+            body: JSON.stringify({cmd}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((b) => b.json());
+    }
+
+    function scrollToBottom() {
+        setTimeout(() => stdout.scrollTo(0, stdout.scrollHeight))
+    }
+
+    function scrollByKey(ratio) {
+        stdout.scrollTop = stdout.scrollTop + ratio * 30;
+    }
+
+    function setEndOfContenteditable(contentEditableElement) {
+        let range, selection;
+        if (document.createRange) {
+            range = document.createRange();
+            range.selectNodeContents(contentEditableElement);
+            range.collapse(false);
+            selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+        } else if (document.selection) {
+            range = document.body.createTextRange();
+            range.moveToElementText(contentEditableElement);
+            range.collapse(false);
+            range.select();
+        }
+    }
+
+    function focusTerminal() {
+        console.log('focus terminal')
+        field.focus()
+        setEndOfContenteditable(field)
+    }
+
+    function addLine(text, withPrefix, parse) {
+        const line = document.createElement('div');
+        if (parse) {
+            line.innerHTML = `${withPrefix ? '> ' : ''}${text}`;
+        } else {
+            line.innerText = `${withPrefix ? '> ' : ''}${text}`;
+        }
+        line.classList.add('line');
+
+        stdout.append(line);
+        field.innerHTML = '';
+
+        scrollToBottom();
+    }
+
+    container.addEventListener('click', () => {
+        focusTerminal();
+    });
+
+    document.body.addEventListener('keydown', async (e) => {
+        const value = field.innerText.trim();
+        const key = e.which || e.keyCode;
+
+        switch (key) {
+            case 13:
+                e.preventDefault();
+
+                if (value) {
+                    addLine(value, true, false);
+                    const {stdout, parse} = await run(value) || {};
+                    addLine(stdout, false, parse);
+                }
+                break;
+
+            case 38:
+                e.preventDefault();
+                cmdHistoryIndex = Math.max(0, cmdHistoryIndex - 1)
+                if (cmdHistory[cmdHistoryIndex]) {
+                    field.innerText = cmdHistory[cmdHistoryIndex]
+                    setEndOfContenteditable(field)
+                }
+                break;
+            case 40:
+                e.preventDefault();
+                cmdHistoryIndex = Math.min(cmdHistory.length, cmdHistoryIndex + 1)
+                if (cmdHistory[cmdHistoryIndex]) {
+                    field.innerText = cmdHistory[cmdHistoryIndex]
+                    setEndOfContenteditable(field)
+                } else {
+                    field.innerText = ''
+                }
+                break;
+        }
+    }, true);
+
+    focusTerminal();
+</script>
+</body>
+</html>

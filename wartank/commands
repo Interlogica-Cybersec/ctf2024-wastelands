@@ -1,0 +1,4 @@
+docker-compose up -d --build
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=NUL wartank@127.0.0.1 -p2222
+
+wartank:wartank

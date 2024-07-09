@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vending Machine</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/vending_machine/style.css">
+</head>
+<body>
+<svg class="interactive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2912 1632">
+    <image id="vendingMachine" href="static/vending_machine/vending_machine_off.jpg" height="1632" width="2912"/>
+    <image id="leftNeon" href="static/vending_machine/left-neon.png" height="1632" width="2912"/>
+    <image id="rightNeon" href="static/vending_machine/right-neon.png" height="1632" width="2912"/>
+    <image id="topNeon" href="static/vending_machine/top-neon.png" height="1632" width="2912"/>
+    <image id="buttons" href="static/vending_machine/buttons.png" height="1632" width="2912"/>
+    <image class="hoverable" x="260" y="-50" href="/static/dfsec-logo-bw.svg" height="140" width="200" onclick="location='/gl1tch.html'"/>
+</svg>
+<div class="modal-wrapper hidden" id="modalWrapper1">
+    <div class="modal">
+        <div class="modal-header">The vending machine is powering on</div>
+        <div class="modal-content">The battery we found is working! The vending machine is powering on!</div>
+        <div class="modal-content"><label><input type="checkbox" id="useAudio" checked>Use audio</label></div>
+        <div class="modal-buttons">
+            <button onclick="closeModal(modalWrapper1)">Nice!</button>
+        </div>
+    </div>
+</div>
+<div class="modal-wrapper hidden" id="modalWrapper2">
+    <div class="modal">
+        <div class="modal-header">The vending machine is on</div>
+        <div class="modal-content">Wohoo! Maybe now we can connect to the data port with the guest user.</div>
+        <div class="modal-buttons">
+            <button onclick="closeModal(modalWrapper2)">Let's go!</button>
+        </div>
+    </div>
+</div>
+<audio id="vendingMachineStart">
+    <source src="static/vending_machine/vending-machine.mp3" type="audio/mpeg">
+</audio>
+<script>
+
+    function playSound() {
+        if (!useAudio.checked) {
+            return
+        }
+        vendingMachineStart.volume = 0.3
+        vendingMachineStart.loop = false
+        vendingMachineStart.play()
+    }
+
+    function openModal(modal) {
+        modal.classList.remove('hidden')
+    }
+
+    function closeModal(modal) {
+        modal.classList.add('hidden')
+        if (localStorage.getItem('vending-machine-started')) {
+
+        } else {
+            localStorage.setItem('vending-machine-started', true)
+            animate()
+        }
+
+    }
+
+    function animate() {
+        playSound()
+        leftNeon.classList.add('left-neon-animation')
+        rightNeon.classList.add('right-neon-animation')
+        topNeon.classList.add('top-neon-animation')
+        buttons.classList.add('buttons-animation')
+        setTimeout(() => openModal(modalWrapper2), 10000)
+    }
+
+    if (localStorage.getItem('vending-machine-started')) {
+        openModal(modalWrapper2)
+    } else {
+        leftNeon.classList.add('transparent')
+        rightNeon.classList.add('transparent')
+        topNeon.classList.add('transparent')
+        buttons.classList.add('transparent')
+        openModal(modalWrapper1)
+    }
+</script>
+</body>
+</html>

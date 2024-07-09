@@ -1,0 +1,23 @@
+version: "2.4"
+services:
+  app:
+    build:
+      context: .
+    networks:
+      - nginx
+
+  nginx:
+    build:
+      context: nginx
+    ports:
+      - "3332:80"
+      - "3333:22"
+    depends_on:
+      - app
+    networks:
+      - default
+      - nginx
+
+networks:
+  nginx:
+    internal: true

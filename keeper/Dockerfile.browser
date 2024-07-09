@@ -1,0 +1,34 @@
+FROM python:3.12-bookworm
+
+RUN apt-get update -y
+# We need wget to set up the PPA and xvfb to have a virtual screen and unzip to install the Chromedriver
+RUN apt-get install -y wget xvfb unzip
+# Set up the Chrome PPA
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+#RUN apt-get install -y google-chrome-stable
+RUN wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_124.0.6367.91-1_amd64.deb
+RUN apt-get update -y && apt-get install -y ./google-chrome-stable_124.0.6367.91-1_amd64.deb
+
+
+RUN mkdir /app
+WORKDIR /app
+
+# Install Chromedriver
+COPY docker /app/docker
+RUN chmod +x /app/docker/setup.sh
+RUN /app/docker/setup.sh
+# Put Chromedriver into the PATH
+ENV PATH /chromedriver:$PATH
+
+# Python stuff
+COPY requirements.txt /app
+RUN pip install -r requirements.txt
+COPY static /app/static
+COPY templates /app/templates
+COPY .env /app
+COPY browser.py /app
+
+RUN pip install -r requirements.txt
+
+CMD ["python", "-u", "browser.py"]

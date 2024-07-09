@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mechcore:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - nginx
+
+  nginx:
+    build:
+      context: nginx
+    ports:
+      - "2223:22"
+    depends_on:
+      - mechcore
+    networks:
+      - default
+      - nginx
+
+networks:
+  nginx:
+    internal: true

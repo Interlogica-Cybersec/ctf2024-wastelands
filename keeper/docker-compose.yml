@@ -1,0 +1,22 @@
+version: "3"
+services:
+  # .local is mandatory: chrome will try to use https instead of http
+  # when connecting to the endpoints otherwise and EXPLODE!!1one!
+  app.local:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "5020:5000"
+    networks:
+      - local
+      - default
+  browser.local:
+    build:
+      context: .
+      dockerfile: Dockerfile.browser
+    networks:
+      - local
+networks:
+  local:
+    internal: true

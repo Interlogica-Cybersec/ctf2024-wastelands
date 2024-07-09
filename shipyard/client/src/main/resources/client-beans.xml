@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+</bean>
+<bean id="shipyardControlBean"
+class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+    <property name="serviceUrl"
+         value="http://${HOST}/remote/shipyardControl.http"></property>
+    <property name="serviceInterface" value="com.shipyard.ship.shared.interfaces.ShipyardControlSystem"></property>
+</bean>
+<bean id="licenseServiceBean"
+class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+    <property name="serviceUrl"
+         value="http://${HOST}/remote/licenseService.http"></property>
+    <property name="serviceInterface" value="com.shipyard.ship.shared.interfaces.LicenseService"></property>
+</bean>
+</beans>

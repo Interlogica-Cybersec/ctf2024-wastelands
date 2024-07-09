@@ -1,0 +1,162 @@
+@font-face {
+    font-family: rational;
+    src: url(/static/video/RationalInteger.ttf);
+}
+
+body {
+    font-family: rational;
+    letter-spacing: .125rem;
+    margin: 0;
+    position: relative;
+    background: black;
+    overflow: hidden;
+}
+
+button {
+    font-family: rational;
+    letter-spacing: .125rem;
+    font-size: 1.25rem;
+}
+
+.interactive {
+    aspect-ratio: 16/9;
+    position: absolute;
+    min-height: 100vh;
+    min-width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hoverable {
+    transform-origin: 300px 300px;
+    filter: invert(1);
+    opacity: .35;
+    transform: rotate(-23deg);
+}
+
+.hoverable:hover {
+    filter: none;
+    cursor: pointer;
+    opacity: .5;
+}
+
+.reactor-off-animation {
+    animation: startup 14s linear forwards;
+}
+
+.reactor-on-animation {
+
+}
+
+.reactor-flare {
+    opacity: 0;
+}
+
+.reactor-flare-animation {
+    animation: flare 14s linear infinite;
+}
+
+@keyframes startup {
+    0% {opacity: 1;}
+    20% {opacity: .9;}
+    40% {opacity: .8;}
+    60% {opacity: .6;}
+    80% {opacity: .3;}
+    100% {opacity: 0;}
+}
+
+@keyframes flare {
+    0% {opacity: 0;}
+    20% {opacity: 1;}
+    40% {opacity: .5;}
+    60% {opacity: .9;}
+    80% {opacity: .7;}
+    100% {opacity: 0;}
+}
+
+.modal-wrapper {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00000044;
+    pointer-events: none;
+}
+
+.modal {
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    border: #fff .125rem solid;
+    background: #00000084;
+    color: #fff;
+}
+
+.modal-header {
+    padding: 1rem;
+    border-bottom: #fff .125rem solid;
+}
+
+.modal-content {
+    padding: 1rem;
+}
+
+.modal-buttons {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-around;
+}
+
+.modal-buttons button {
+    padding: .5rem 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.transparent {
+    opacity: 0;
+}
+
+.bar {
+    height: 0;
+    opacity: 0;
+    transition: height 2s, opacity 2s;
+    background: black;
+    z-index: 100;
+}
+
+.top-bar {
+    width: 100%;
+    top: 0;
+    position: absolute;
+}
+
+.bottom-bar {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+.full-bar {
+    height: 8rem;
+    opacity: 1;
+}
+
+@media only screen and (max-height: 35rem) {
+    .full-bar {
+        height: 3rem;
+    }
+}
+
+@media only screen and (max-width: 35rem) {
+    .full-bar {
+        height: 3rem;
+    }
+}

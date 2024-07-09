@@ -1,0 +1,232 @@
+@font-face {
+    font-family: rational;
+    src: url(RationalInteger.ttf);
+}
+
+body {
+    font-family: rational;
+    letter-spacing: .125rem;
+    background: #045789;
+    color: #eee;
+    margin: 0;
+    position: relative;
+}
+
+button {
+    font-family: rational;
+    letter-spacing: .125rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+input {
+    font-family: rational;
+    letter-spacing: .125rem;
+    font-size: 1.25rem;
+}
+
+.header {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: .125rem solid white;
+}
+
+.title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: .75rem;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 2rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 1rem 0 1rem;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    margin: 1rem 1rem 0 1rem;
+    gap: 1rem;
+}
+
+.main-image {
+    margin-top: 2rem;
+    width: 20rem;
+    height: 20rem;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    margin-top: 1rem;
+    margin-bottom: .25rem;
+    font-weight: bold;
+}
+
+.section-value {
+    margin-left: 1rem;
+    font-size: 1.25rem;
+}
+
+.actions-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin-top: .25rem;
+}
+
+.actions-wrapper button {
+    margin-left: 1rem;
+    padding: .75rem;
+    text-transform: uppercase;
+}
+
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00000044;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    width: 36rem;
+    border: #fff .125rem solid;
+    background: #045789;
+    color: #fff;
+}
+
+.modal-header {
+    font-weight: bold;
+    padding: 1rem;
+    border-bottom: #fff .125rem solid;
+    font-size: 1.25rem;
+}
+
+.modal-content {
+    padding: 1rem;
+    font-size: 1.25rem;
+}
+
+.modal-buttons {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-around;
+}
+
+.modal-buttons button {
+    padding: .5rem 1rem;
+}
+
+.modal-code-block {
+    overflow-y: auto;
+    max-height: 20rem;
+    border: .125rem solid white;
+    margin: 1rem;
+    padding: 1rem;
+    font-family: monospace;
+    color: black;
+    background: #eee;
+    font-size: 1.25rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.particles {
+    opacity: 1;
+    top: 0;
+    position: absolute;
+    z-index: -1;
+    max-width: 100%;
+    min-height: 100%;
+}
+
+:root {
+    --col-bg: #212121;
+    --col-link: #bbdefb;
+    --col-text: #ebe7c5;
+    --col-particle-stroke-hover: #ffffff33;
+    --col-particle-stroke: #ffffff22;
+    --col-particle: #ffffff22;
+}
+
+a {
+    color: white;
+}
+
+.card-section-title {
+    font-weight: bold;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    border: .125rem solid white;
+    width: 14rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: .75rem;
+    font-size: 1.25rem;
+}
+
+.card img {
+    max-height: 10rem;
+    max-width: 6rem;
+}
+
+.card button {
+    padding: .5rem;
+}
+
+.image-wrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+}
+
+.reset-form {
+    margin-top: .5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.reset-form input {
+    flex-grow: 1;
+}
+
+.message {
+    margin-top: 1rem;
+}

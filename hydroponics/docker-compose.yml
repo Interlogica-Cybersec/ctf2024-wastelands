@@ -1,0 +1,31 @@
+version: "3"
+services:
+  proxy:
+    image: alpine/socat
+    ports:
+      - "8000:8000"
+    command: '-d -d tcp-listen:8000,fork,reuseaddr tcp-connect:app:80'
+    depends_on:
+      - app
+    networks:
+      - default
+      - restricted
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PASSCODE=d3faul7-conf1gur4t10n-f1l3.json
+#    expose:
+#      - "80:80"
+#      - "21:21"
+#      - "40000-40009:40000-40009"
+    networks:
+      - restricted
+    environment:
+      - PASSCODE=d3faul7-conf1gur4t10n-f1l3.json
+      - FLAG=NTRLGC{W4itC4nIRe4llyD01t?!}
+      - SUCCESS_COOKIE=6afc4fba-c20f-4653-a981-f78872d752fa
+networks:
+  restricted:
+    internal: true

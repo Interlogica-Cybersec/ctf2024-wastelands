@@ -1,0 +1,440 @@
+    @font-face {
+        font-family: alienrobot;
+        src: url(../static/AlienRobot.ttf);
+    }
+
+    .body {
+        font-family: alienrobot;
+        margin: 0;
+        background: #def0ff;
+        background-image: url(../static/reactor_console.jpg);
+        background-size: cover;
+        background-position: center;
+        color: #fd5109;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        min-width: fit-content;
+    }
+
+    a {
+        color: #fd5109;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    button {
+        font-family: alienrobot;
+        cursor: pointer;
+    }
+
+    input {
+        font-family: alienrobot;
+    }
+
+    .modal-wrapper {
+        position: fixed;
+        margin: 0;
+        background: #1a1b1fc5;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .modal {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: .125rem solid #fd5109;
+        padding: 1rem;
+        background: #1a1b1fc5;
+        width: 30rem;
+    }
+
+    .modal-big {
+        width: 50rem;
+    }
+
+    .modal-header {
+        width: 100%;
+        border-bottom: .125rem solid #fd5109;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-2 {
+        display: flex;
+        flex-direction: column;
+        justify-items: end;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .form-3 {
+        display: flex;
+        flex-direction: column;
+        justify-items: end;
+        justify-content: center;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .form-input-section {
+        display: flex;
+        gap: .5rem;
+        flex-direction: column;
+    }
+
+    .form-buttons-section {
+        display: flex;
+        gap: .5rem;
+    }
+
+    .wrapper {
+        margin: 0 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        margin-top: 1.5rem;
+        font-size: 1.5rem;
+    }
+
+    .section-value {
+        margin-top: .5rem;
+        margin-left: 1.5rem;
+    }
+
+    .actions-section {
+        width: 30rem;
+        margin-top: .5rem;
+        margin-left: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .atom-section {
+        margin-top: .5rem;
+        margin-left: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .atom {
+        width: 10rem;
+        height: 10rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .orbit {
+        position: absolute;
+        border-radius: 50%;
+        top: 45%;
+        left: 45%;
+        border-left: .125rem solid #fd5109;
+    }
+
+    .orbit-1 {
+        height: 90%;
+        width: 85%;
+        animation: orbiting 1s linear infinite;
+   }
+
+    .orbit-2 {
+        height: 75%;
+        width: 75%;
+        animation-delay: .30s;
+        animation: orbiting .81s linear infinite;
+    }
+
+    .orbit-3 {
+        height: 65%;
+        width: 65%;
+        animation-delay: .5s;
+        animation: orbiting .57s linear infinite;
+    }
+
+    .orbit-4 {
+        height: 70%;
+        width: 60%;
+        animation-delay: .65s;
+        animation: orbiting .66s linear infinite;
+    }
+
+    .orbit-5 {
+        height: 85%;
+        width: 75%;
+        animation-delay: .95s;
+        animation: orbiting .7s linear infinite;
+    }
+
+    .nuclei {
+        position: absolute;
+        border-radius: 50%;
+        height: 10%;
+        width: 10%;
+        transform: translate(-50%, -50%);
+        animation: vibrating .7s linear infinite;
+        background: radial-gradient(circle at center, #fd5109 0, #fd5109, green 100%)
+    }
+
+    .nucleus-1 {
+        top: 47%;
+        left: 53%;
+    }
+
+    .nucleus-2 {
+        top: 47%;
+        left: 47%;
+    }
+
+    .nucleus-3 {
+        top: 52%;
+        left: 47%;
+    }
+
+    .nucleus-4 {
+        top: 52%;
+        left: 53%;
+    }
+
+    .nucleus-5 {
+        top: 46%;
+        left: 50%;
+    }
+
+    @keyframes orbiting {
+      0% {transform: scale(100%, 75%) translate(-50%, -50%) rotate(0deg);}
+      20% {transform:  scale(75%, 100%) translate(-50%, -50%) rotate(360deg);}
+      40% {transform:  scale(100%, 75%) translate(-50%, -50%) rotate(720deg);}
+      60% {transform:  scale(75%, 100%) translate(-50%, -50%) rotate(1080deg);}
+      80% {transform:  scale(100%, 75%) translate(-50%, -50%) rotate(1440deg);}
+      100% {transform:  scale(100%, 75%) translate(-50%, -50%) rotate(1800deg);}
+    }
+
+    @keyframes vibrating {
+      0% {transform: translate(-50%, -50%);}
+      10% {transform: translate(-55%, -47%);}
+      20% {transform: translate(-48%, -51%);}
+      30% {transform: translate(-47%, -52%);}
+      40% {transform: translate(-51%, -48%);}
+      50% {transform: translate(-50%, -49%);}
+      60% {transform: translate(-45%, -51%);}
+      70% {transform: translate(-49%, -52%);}
+      80% {transform: translate(-48%, -48%);}
+      90% {transform: translate(-49%, -53%);}
+      100% {transform: translate(-50%, -50%);}
+    }
+
+    .header {
+        background: #1a1b1f;
+        position: sticky;
+        display: flex;
+        padding: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: .125rem solid #fd5109;
+    }
+
+    .login {
+        cursor: pointer;
+    }
+
+    .login:hover {
+        color: #fff;
+    }
+
+    .logout {
+        margin-left: 1rem;
+        text-decoration: auto;
+        color: #fd5109;
+    }
+
+    .logout:hover {
+        color: #fff;
+    }
+
+    .fill {
+        width: -webkit-fill-available;
+        width: -moz-fill-available;
+    }
+
+    .message {
+        margin-top: 1rem;
+        text-wrap: wrap;
+    }
+
+    button[disabled] {
+        cursor: not-allowed;
+    }
+
+   .fission-section {
+       margin-top: .5rem;
+       margin-left: 1.5rem;
+       display: flex;
+       align-items: center;
+   }
+
+   .fission {
+       position: relative;
+       width: 12rem;
+       height: 8rem;
+   }
+
+   .neutron {
+       position: absolute;
+       border-radius: 50%;
+       height: 1rem;
+       width: 1rem;
+       transform: translate(0, 3.5rem);
+       background: radial-gradient(circle at center, #fd5109 0, #fd5109, green 100%);
+       animation: collide 1.5s linear infinite;
+   }
+
+   .full-atom {
+       #width: 100%;
+       #height: 100%;
+       position: absolute;
+   }
+
+   .full-atom-neutron {
+       position: absolute;
+       border-radius: 50%;
+       height: 1rem;
+       width: 1rem;
+       top: 3.5rem;
+       left: 10rem;
+       background: radial-gradient(circle at center, #fd5109 0, #fd5109, green 100%);
+   }
+
+   .atom-neutron-1 {
+       left: 9.5rem;
+       top: 3.5rem;
+       animation: split-down 1.5s linear infinite;
+   }
+
+   .atom-neutron-2 {
+       left: 9.8rem;
+       top: 3.8rem;
+       animation: split-down 1.5s linear infinite;
+   }
+
+   .atom-neutron-3 {
+       left: 10rem;
+       top: 3.4rem;
+       animation: split-down 1.5s linear infinite;
+   }
+
+   .atom-neutron-4 {
+       left: 9.7rem;
+       top: 3.2rem;
+       animation: split-up 1.5s linear infinite;
+   }
+
+   .atom-neutron-5 {
+       left: 10.2rem;
+       top: 3.2rem;
+       animation: split-up 1.5s linear infinite;
+   }
+
+   .atom-neutron-6 {
+       left: 10.2rem;
+       top: 3.8rem;
+       transform: translate(.2rem, .3rem);
+       animation: split-up 1.5s linear infinite;
+   }
+
+   .atom-neutron-7 {
+       left: 9.6rem;
+       top: 3.5rem;
+       transform: translate(-.4rem, 0);
+       animation: split-up 1.5s linear infinite;
+   }
+
+   .collision-particles {
+       position: absolute;
+       height: 3rem;
+       width: 3rem;
+       top: 2.5rem;
+       left: 8.5rem;
+       animation: explode 1.5s linear infinite;
+   }
+
+   .collision-particle {
+       #fill: .125rem solid #fd5109;
+       #fill:#2fd5109;
+       #stroke-width:1;
+       #stroke-linejoin:round;
+       #stroke:#2fd5109;
+       #stroke-opacity:1;
+   }
+
+   @keyframes collide {
+        0% {transform: translate(0rem, 3.5rem); visibility: visible;}
+        10% {transform: translate(1*10/6rem, 3.5rem);}
+        20% {transform: translate(2*10/6rem, 3.5rem);}
+        30% {transform: translate(3*10/6rem, 3.5rem);}
+        40% {transform: translate(4*10/6rem, 3.5rem);}
+        50% {transform: translate(5*10/6rem, 3.5rem);}
+        60% {transform: translate(10rem, 3.5rem);}
+        61% {transform: translate(10rem, 3.5rem); visibility: hidden;}
+        70% {transform: translate(0rem, 3.5rem);}
+        80% {transform: translate(0rem, 3.5rem);}
+        90% {transform: translate(0rem, 3.5rem);}
+        100% {transform: translate(0rem, 3.5rem); visibility: hidden;}
+   }
+
+   @keyframes split-up {
+        0% {transform: translate(0, 0); visibility: visible;}
+        10% {transform: translate(0,0);}
+        20% {transform: translate(0,0);}
+        30% {transform: translate(0,0);}
+        40% {transform: translate(0,0);}
+        50% {transform: translate(0,0);}
+        60% {transform: translate(0, 0);}
+        70% {transform: translate(.75rem, -.75rem);}
+        80% {transform: translate(1.5rem, -1.5rem);}
+        90% {transform: translate(2.25rem, -2.25rem); visibility: visible;}
+        91% {transform: translate(2.25rem, -2.25rem); visibility: hidden;}
+        100% {transform: translate(0, 0); visibility: hidden;}
+   }
+
+    @keyframes split-down {
+        0% {transform: translate(0, 0); visibility: visible;}
+        10% {transform: translate(0,0);}
+        20% {transform: translate(0,0);}
+        30% {transform: translate(0,0);}
+        40% {transform: translate(0,0);}
+        50% {transform: translate(0,0);}
+        60% {transform: translate(0, 0);}
+        70% {transform: translate(.75rem, .75rem);}
+        80% {transform: translate(1.5rem, 1.5rem);}
+        90% {transform: translate(2.25rem, 2.25rem); visibility: visible;}
+        91% {transform: translate(2.25rem, 2.25rem); visibility: hidden;}
+        100% {transform: translate(0, 0); visibility: hidden;}
+    }
+    @keyframes explode {
+        0% {visibility: hidden;}
+        10% {visibility: hidden;}
+        20% {visibility: hidden;}
+        30% {visibility: hidden;}
+        40% {visibility: hidden;}
+        50% {visibility: hidden;}
+        60% {visibility: hidden; scale: 1}
+        70% {visibility: visible; scale: 1.5}
+        72% {visibility: hidden;}
+        80% {visibility: hidden;scale: 1}
+        90% {visibility: hidden;}
+        100% {visibility: hidden;}
+    }

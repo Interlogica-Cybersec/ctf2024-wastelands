@@ -1,0 +1,1 @@
+<div class="text-align: justify;">It has been 3 days. 3 days with no food, we need to eat something. There's a pre-war warehouse up north that somehow is still closed. The reinforced door is controlled by a terminal. If we manage to hack it open we may find something to eat... That is, if it has not spoiled after these 50 years.</div>

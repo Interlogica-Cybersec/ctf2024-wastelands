@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <meta charset="UTF-8">
+    <title>Reactor Control Panel</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="body">
+<div class="header">
+    <div class="title">
+        Kilo-Reactor MK02
+    </div>
+    <div>{{username}}<a class="logout" href="/?logout=true">Logout</a></div>
+</div>
+<div class="wrapper">
+    <div class="section-title">
+        Status:
+    </div>
+    <div class="section-value">
+        {% if started %}
+        Running
+        {% else %}
+        SCRAM emergency shutdown
+        {% endif %}
+    </div>
+
+    {% if not started %}
+    <div class="section-title">
+        Reason:
+    </div>
+    <div class="section-value">
+        Manual SCRAM
+    </div>
+    {% endif %}
+
+    <div class="section-title">
+        Energy output:
+    </div>
+    <div class="section-value">
+        {% if started %}
+        34.72 KILOWATT (97%)
+        {% else %}
+        0 KILOWATT (0%)
+        {% endif %}
+    </div>
+    <div class="section-title">
+        Reaction Type:
+    </div>
+    <div class="section-value">
+        Nuclear Fission
+    </div>
+    <div class="fission-section">
+        <div class="fission">
+            <svg class="collision-particles" style="fill:#fd5109;fill-opacity:0.246246;stroke-width:5;stroke-linejoin:round;stroke:#fd5109;stroke-opacity:1"
+                 viewBox="0 0 200 200"
+                 xmlns="http://www.w3.org/2000/svg">
+                <line x1="100" y1="120" x2="100" y2="180"/>
+                <line x1="90" y1="70" x2="75" y2="10"/>
+                <line x1="120" y1="120" x2="180" y2="180"/>
+                <line x1="80" y1="110" x2="10" y2="140"/>
+                <line x1="130" y1="100" x2="190" y2="100"/>
+            </svg>
+            <div class="neutron"></div>
+            <div class="full-atom">
+                <div class="full-atom-neutron atom-neutron-1"></div>
+                <div class="full-atom-neutron atom-neutron-2"></div>
+                <div class="full-atom-neutron atom-neutron-3"></div>
+                <div class="full-atom-neutron atom-neutron-4"></div>
+                <div class="full-atom-neutron atom-neutron-5"></div>
+                <div class="full-atom-neutron atom-neutron-6"></div>
+                <div class="full-atom-neutron atom-neutron-7"></div>
+            </div>
+        </div>
+    </div>
+    <div class="section-title">
+        Fuel Type:
+    </div>
+    <div class="section-value">
+        Thorium 232 - Uranium 233
+    </div>
+    <div class="atom-section">
+        <div class="atom">
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
+            <div class="orbit orbit-4"></div>
+            <div class="orbit orbit-5"></div>
+            <div class="nuclei nucleus-1"></div>
+            <div class="nuclei nucleus-2"></div>
+            <div class="nuclei nucleus-3"></div>
+            <div class="nuclei nucleus-4"></div>
+            <div class="nuclei nucleus-5"></div>
+        </div>
+    </div>
+    <div class="section-title">
+        Actions:
+    </div>
+    <div class="actions-section">
+        {% if started %}
+        <button onclick="openStartSequenceModal()" disabled>Start activation sequence</button>
+        <button onclick="scramShutdown()">SCRAM Emergency Shutdown</button>
+        {% else %}
+        <button onclick="openStartSequenceModal()">Start activation sequence</button>
+        <button onclick="scramShutdown()" disabled>SCRAM Emergency Shutdown</button>
+        {% endif %}
+    </div>
+
+</div>
+<div id="startSequenceModalWrapper" class="modal-wrapper hidden">
+    <div class="modal">
+        <div class="modal-header">Start Sequence</div>
+        <form id="startSequenceForm" class="form-3">
+            <div class="form-input-section">
+                <label for="otp">OTP:</label>
+                <input type="text" id="otp" name="otp" class="fill" placeholder="OTP">
+            </div>
+            <div class="form-buttons-section">
+                <button type="button" onclick="closeStartSequenceModal()" class="fill">Cancel</button>
+                <button type="button" onclick="requestOtp()" class="fill" id="sendOtp">Resend OTP</button>
+                <button type="submit" class="fill">Confirm OTP</button>
+            </div>
+        </form>
+        <div id="message" class="message hidden"></div>
+    </div>
+</div>
+<div id="scramModalWrapper" class="modal-wrapper hidden">
+    <div class="modal">
+        <div class="modal-header">SCRAM Emergency Shutdown</div>
+        <div id="scramMessage" class="message hidden"></div>
+        <button type="button" onclick="closeScramModal()" class="fill">Close</button>
+    </div>
+</div>
+</body>
+<script>
+startSequenceForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(startSequenceForm);
+
+    fetch('/control-panel/api/confirm-otp', {
+        method: 'POST',
+        body: formData
+    })
+    .then(async response => {
+        return {data: await response.json(), status: response.status};
+    })
+    .then(({data, status}) => {
+        if (data.url) {
+            location = data.url
+        } else {
+            message.classList.remove('hidden')
+            message.innerText = data.error || data.message || ''
+        }
+    })
+    .catch(error => {
+        message.classList.remove('hidden')
+        message.innerText = error || ''
+    });
+});
+
+function requestOtp() {
+    fetch('/control-panel/api/request-otp', {
+        method: 'POST',
+    })
+    .then(async response => {
+        return {data: await response.json(), status: response.status};
+    })
+    .then(({data, status}) => {
+        if (status !== 200) {
+            throw data.error
+        }
+        message.classList.remove('hidden')
+        message.innerText = data.error || data.message || ''
+    })
+}
+
+function scramShutdown() {
+    fetch('/control-panel/api/scram', {
+        method: 'POST',
+    })
+    .then(async response => {
+        return {data: await response.json(), status: response.status};
+    })
+    .then(({data, status}) => {
+        if (status !== 200) {
+            throw data.error
+        }
+        scramMessage.classList.remove('hidden')
+        scramMessage.innerText = data.error || data.message || ''
+    })
+    .then(openScramModal)
+}
+
+function closeStartSequenceModal() {
+    startSequenceModalWrapper.classList.add('hidden')
+}
+
+function closeScramModal() {
+    scramModalWrapper.classList.add('hidden')
+}
+
+function openStartSequenceModal() {
+    startSequenceModalWrapper.classList.remove('hidden')
+    requestOtp()
+}
+
+function openScramModal() {
+    scramModalWrapper.classList.remove('hidden')
+}
+
+</script>
+</html>

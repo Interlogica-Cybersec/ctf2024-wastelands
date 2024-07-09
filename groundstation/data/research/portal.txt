@@ -1,0 +1,3 @@
+URL: groundstation.gov/satellite/connect
+USR: gs_research
+PSW: NTRLGC{PR1NC35_0F_7H3_UN1V3R53}

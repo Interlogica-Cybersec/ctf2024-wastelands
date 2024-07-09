@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="wastelands.ico">
+    <meta charset="UTF-8">
+    <title>The library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="topBar" class="bar top-bar"></div>
+<div id="bottomBar" class="bar bottom-bar"></div>
+<div id="overlayTextWrapper" class="overlay-text-wrapper transparent">
+    <div id="overlayText" class="overlay-text transparent"></div>
+</div>
+<div id="turret" class="turret">
+    <img src="machinegun.png">
+    <img src="machinegun2.png" class="muzzle">
+</div>
+<div class="modal-wrapper hidden" id="modalWrapper">
+    <div class="modal">
+        <div class="modal-header">Oh no</div>
+        <div class="modal-content">Oh no, the automatic sentry turrets have been activated. I have nowhere to go.</div>
+        <div class="modal-content"><label><input type="checkbox" id="useAudio" checked>Use audio</label></div>
+        <div class="modal-buttons">
+            <button onclick="closeModal()">Brace yourself</button>
+        </div>
+    </div>
+</div>
+<audio id="audiobg">
+    <source src="machinegun.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
+
+
+<script>
+
+    function playSound(audio, volume = .6, loop = false) {
+        if (!useAudio.checked) {
+            return
+        }
+        audio.volume = volume
+        audio.loop = loop
+        audio.play()
+    }
+
+    function openModal() {
+        modalWrapper.classList.remove('hidden')
+    }
+
+    function closeModal() {
+        modalWrapper.classList.add('hidden')
+        animate()
+    }
+
+    function openFullscreen() {
+        if (document.body.requestFullscreen) {
+            document.body.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            document.body.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            document.body.msRequestFullscreen();
+        }
+    }
+
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+
+    async function startCinematic() {
+        openFullscreen()
+        await delay(1000)
+        topBar.classList.add('full-bar')
+        bottomBar.classList.add('full-bar')
+    }
+
+    async function stopCinematic() {
+        topBar.classList.remove('full-bar')
+        bottomBar.classList.remove('full-bar')
+        await delay(1000)
+        closeFullscreen()
+    }
+
+    async function animate() {
+        startCinematic()
+        await delay(1200)
+        playSound(audiobg, .25, false)
+        await delay(800)
+        deployTurret()
+        await delay(3000)
+        startShooting()
+        await delay(1000)
+        await showOverlayBackground()
+        await delay(1000)
+        stopShooting()
+        await delay(1000)
+        undeployTurret()
+        await displayText(3500, 'So the island exists...')
+        await displayText(4500, '...it\'s a shame nobody will know it...')
+        await displayText(4500, '...at least for a while...')
+        await displayText(0, 'Wastelands<br>Interlogica CTF 2024<br>Join us at <a href="ctf.interlogica.it">ctf.interlogica.it</a><br>NTRLGC{S33_Y4_0N_JULY_5TH}<br>Let us know on our <a target="_blank" href="https://discord.gg/DMKdECJn4y">Discord</a><br>that you found the flag!', true)
+        await delay(2000)
+        await stopCinematic()
+        await delay(5000)
+    }
+
+    async function showOverlayBackground() {
+        overlayTextWrapper.classList.remove('transparent')
+    }
+
+    function delay(t) {
+        return new Promise(resolve => setTimeout(resolve, t));
+    }
+
+    async function displayText(time, str, keep = false) {
+        overlayText.innerHTML = str
+        overlayText.classList.remove('transparent')
+        await delay(time)
+        if (!keep) {
+            overlayText.classList.add('transparent')
+        }
+        await delay(2000)
+    }
+
+    openModal()
+
+    function deployTurret() {
+        turret.classList.add('deployed-turret')
+    }
+
+    function undeployTurret() {
+        turret.classList.remove('deployed-turret')
+    }
+
+    function startShooting() {
+        turret.classList.add('shooting')
+    }
+
+    function stopShooting() {
+        turret.classList.remove('shooting')
+    }
+</script>

@@ -1,0 +1,15 @@
+FROM gradle:jdk21-alpine AS spring-builder
+WORKDIR /app
+COPY build.gradle .
+COPY settings.gradle .
+COPY gradlew .
+COPY gradle ./gradle
+RUN ./gradlew --no-daemon dependencies
+COPY src ./src
+RUN ./gradlew --no-daemon build
+
+FROM amazoncorretto:21-alpine
+WORKDIR /app
+COPY --from=spring-builder /app/build/libs/ship-0.0.1-SNAPSHOT.jar ./ship-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+CMD ["java", "-jar", "ship-0.0.1-SNAPSHOT.jar"]

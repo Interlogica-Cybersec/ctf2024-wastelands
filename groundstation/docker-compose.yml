@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  ubuntu-server:
+    build: .
+    image: my-ubuntu-server
+    container_name: groundstation
+#    environment:
+#       - SHARED_DIRECTORY=/data
+    # volumes:
+    #    - ./data:/data
+    ports:
+      - "2121:21" # FTP
+      - "40000-40009:40000-40009" #FTP
+    restart: unless-stopped

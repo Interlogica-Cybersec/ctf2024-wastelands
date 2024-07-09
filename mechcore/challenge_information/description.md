@@ -1,0 +1,4 @@
+<div style="text-align: justify;">GovGPT said that the data about the island can be gathered by uploading one of its agents on a satellite from the ESAP groundstation. We need to find that facility. Maybe in the ESAP complex here we can get what we need to find its location.<br>
+We breached the complex and discovered a bunch of rundown robots. Seeing their potential, we decided to repair them and use them to defend our base or attack our enemies. Time to get to work and see what these robots can do!
+<br>We start with the first one we see: it has the word "mechcore" stamped on its torso. Even if it is not armed, it can be modified later on or used for simpler tasks in the city.
+</div>

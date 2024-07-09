@@ -1,0 +1,5 @@
+#!/bin/bash
+# Terminate the current SSH session
+pkill -9 -u wartank sshd &
+
+exit 0

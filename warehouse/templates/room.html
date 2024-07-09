@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The warehouse</title>
+    <link rel="stylesheet" href="static/room.css">
+    <link rel="stylesheet" href="static/terminal.css">
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+</head>
+<body>
+<video autoplay muted class="room-video transform">
+    <source src="static/video.mp4" type="video/mp4" onerror="alert('Your browser does not allow video playback, which is needed here')">
+</video>
+<svg id="roombg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 776" onclick="closeTerminal()">
+    <path id='terminal' d='M1091,272 1168,272 1168,320 1091,320z' pointer-events="visible" onclick="switchTerminal()"
+          fill="#00000000" stroke="currentColor" stroke-width="2"/>
+</svg>
+<div id="terminalContainer" class="terminal-container closed-terminal">{% include 'terminal.html' %}</div>
+<script>
+
+    function closeTerminal() {
+        if (terminalContainer.classList.contains('open-terminal')) {
+            terminalContainer.classList.remove('open-terminal');
+            terminalContainer.classList.add('closed-terminal');
+        }
+    }
+
+    function switchTerminal() {
+        setTimeout(() => {
+            if (terminalContainer.classList.contains('closed-terminal')) {
+                terminalContainer.classList.remove('closed-terminal');
+                terminalContainer.classList.add('open-terminal');
+                setTimeout(() => {
+                    focusTerminal();
+                }, 500)
+            } else {
+                terminalContainer.classList.remove('open-terminal');
+                terminalContainer.classList.add('closed-terminal');
+            }
+        }, 1)
+    }
+
+    setTimeout(() => {
+        roombg.style.display = 'block'
+    }, 3500)
+</script>
+</body>
+</html>

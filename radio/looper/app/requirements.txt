@@ -1,0 +1,3 @@
+paho-mqtt<2.0.0
+morse-audio-decoder==0.1.1
+morse3==2.9

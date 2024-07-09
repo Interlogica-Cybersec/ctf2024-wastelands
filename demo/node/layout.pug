@@ -1,0 +1,26 @@
+html
+    head
+        link(rel='stylesheet', type='text/css', href='/library/static/style.css')
+        link(rel='icon', type='image/x-icon', href="/library/static/favicon.ico")
+        script(defer='', src='/library/static/js.js')
+        title Bureau of Information
+    body
+        div.header
+            div Government Archives & Library
+        div.wrapper#content
+            block content
+
+        div.disclaimer.hidden#disclaimer
+            div.disclaimer-title Warning
+            div Access to this facility is strictly forbidden to unauthorized personnel.
+            div Authorized personnel, aside from ones with explicitly granted clearance, are:
+            div - Government officials
+            div - Military officials
+            div - Bureau of Information personnel
+            div - Jeff from the cafeteria
+            div - President Prumt
+            div Security is guaranteed by an automatic sentry system with automatic threat detection and neutralization.
+            button.button.dismiss(onclick='dismissDisclaimer()') Dismiss
+
+        div.footer
+            div Government Archives & Library - Updated and maintained by govGPT

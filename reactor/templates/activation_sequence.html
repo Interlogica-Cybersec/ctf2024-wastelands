@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <meta charset="UTF-8">
+    <title>Reactor</title>
+    <link rel="stylesheet" href="/static/video/style.css">
+</head>
+<body>
+<div id="topBar" class="bar top-bar"></div>
+<div id="bottomBar" class="bar bottom-bar"></div>
+<svg class="interactive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+    <image id="reactorOn" href="/static/video/reactor1.jpg" height="1080" width="1920"/>
+    <image id="reactorOff" href="/static/video/reactor0.jpg" height="1080" width="1920"/>
+    <image id="reactorFlare" class="reactor-flare" href="/static/video/flare.png" height="1080" width="1920"/>
+    <image class="hoverable" x="230" y="350" href="/static/dfsec-logo-bw.svg" height="108" width="131" onclick="location='/?gl1tch'"/>
+</svg>
+<div class="modal-wrapper hidden" id="modalWrapper">
+    <div class="modal">
+        {% if glitch %}
+        {% include 'glitch.html' %}
+        {% else %}
+        <div class="modal-header">The reactor is starting!</div>
+        <div class="modal-content">The reactor is finally starting!</div>
+        <div class="modal-content"><label><input type="checkbox" id="useAudio" checked>Use audio</label></div>
+        <div class="modal-buttons">
+            <button onclick="closeModal()">Nice!</button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="modal-wrapper hidden" id="flagModalWrapper">
+    <div class="modal">
+        <div class="modal-header">The reactor is running!</div>
+        <div class="modal-content">{{flag}}</div>
+    </div>
+</div>
+<audio id="reactorStart">
+    <source src="/static/video/reactor-startup.mp3" type="audio/mpeg">
+</audio>
+</body>
+<script>
+    function playSound() {
+        if (!useAudio.checked) {
+            return
+        }
+        reactorStart.volume = 0.3
+        reactorStart.loop = false
+        reactorStart.play()
+    }
+
+    function openModal() {
+        modalWrapper.classList.remove('hidden')
+    }
+
+    function closeModal() {
+        modalWrapper.classList.add('hidden')
+        if (!localStorage.getItem('started')) {
+            localStorage.setItem('started', true)
+            animate()
+        }
+    }
+
+
+    function openFullscreen() {
+        if (document.body.requestFullscreen) {
+            document.body.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            document.body.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            document.body.msRequestFullscreen();
+        }
+    }
+
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+
+    async function startCinematic() {
+        openFullscreen()
+        await delay(1000)
+        topBar.classList.add('full-bar')
+        bottomBar.classList.add('full-bar')
+    }
+
+    async function stopCinematic() {
+        topBar.classList.remove('full-bar')
+        bottomBar.classList.remove('full-bar')
+        await delay(1000)
+        closeFullscreen()
+    }
+
+    function delay(t) {
+        return new Promise(resolve => setTimeout(resolve, t));
+    }
+
+    async function animate() {
+        reactorOff.classList.add('reactor-off-animation')
+        reactorOn.classList.add('reactor-on-animation')
+        reactorFlare.classList.add('reactor-flare-animation')
+        await startCinematic()
+        playSound()
+        await delay(15000)
+        await stopCinematic()
+        await delay(500)
+        showFlag()
+    }
+
+    function showFlag() {
+        flagModalWrapper.classList.remove('hidden')
+    }
+
+    if (localStorage.getItem('started')) {
+        reactorOff.classList.add('hidden')
+        reactorFlare.classList.add('reactor-flare-animation')
+        showFlag()
+    } else {
+        openModal()
+    }
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vending Machine</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/vending_machine/style.css">
+    <style>
+    .dfsec-img {
+        width: 15rem;
+        margin: auto;
+    }
+    </style>
+</head>
+<body>
+<svg class="interactive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2912 1632">
+    <image id="vendingMachine" href="static/vending_machine/vending_machine_off.jpg" height="1632" width="2912"/>
+    <image id="leftNeon" href="static/vending_machine/left-neon.png" height="1632" width="2912"/>
+    <image id="rightNeon" href="static/vending_machine/right-neon.png" height="1632" width="2912"/>
+    <image id="topNeon" href="static/vending_machine/top-neon.png" height="1632" width="2912"/>
+    <image id="buttons" href="static/vending_machine/buttons.png" height="1632" width="2912"/>
+    <image class="hoverable" x="260" y="-50" href="/static/dfsec-logo-bw.svg" height="140" width="200" onclick="location='/gl1tch.html'"/>
+</svg>
+<div class="modal-wrapper hidden" id="modalWrapper">
+    <div class="modal modal-big">
+        <div class="modal-header">Congratulations!</div>
+        <div class="modal-content">You found an ADV Glitch! Dataflow Security #1</div>
+        <div class="modal-content"><img class="dfsec-img" src="/static/dfsec-logo-bw.svg"></div>
+        <div class="modal-content"><span>Ready to move beyond solo pwning? Dataflow Security is hiring! <a target="_blank" href="https://dfsec.com/#careers">dfsec.com/#careers</a></span></div>
+        <div class="modal-content">DFSEC{9dc8feb4-f356-437b-b3db-a1116f2621aa}</div>
+        <div class="modal-buttons">
+            <button onclick="location='/'">Oh wow! Cool!</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    function openModal(modal) {
+        modal.classList.remove('hidden')
+    }
+
+    openModal(modalWrapper)
+</script>
+</body>
+</html>

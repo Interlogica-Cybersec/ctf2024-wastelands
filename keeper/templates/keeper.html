@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keeper page</title>
+</head>
+<body>
+Message:
+<pre>
+    {{message | safe}}
+</pre>
+<div id="wrapper">
+    Type the following confirmation message to grant access:
+    "{{confirmation_message}}". Type anything else to deny
+    <form>
+        <input type="text" name="msg">
+        <input type="hidden" id="token" name="token">
+        <input type="submit" id="submit" value="Submit">
+    </form>
+</div>
+<script>
+    token.value = new URLSearchParams(window.location.search).get('token');
+</script>
+</body>
+</html>

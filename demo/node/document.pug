@@ -1,0 +1,14 @@
+extends layout.pug
+
+append content
+    div.title Bureau of Information
+    div.subtitle Intelligence Archives & Library
+    div.document-content
+        if document && document.content
+            | !{document.content}
+        else if document
+            div.centered - DATA CORRUPTED -
+        else
+            div.centered - ENTRY NOT FOUND -
+    button.button.more-info(disabled=!document.moreInfoAvailable, onclick='requestMoreInfo("'+document.id+'")') Request more info
+    button.button.back(onclick='location="/library/"') Back

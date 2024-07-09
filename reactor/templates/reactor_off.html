@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <meta charset="UTF-8">
+    <title>Reactor</title>
+    <link rel="stylesheet" href="/static/video/style.css">
+</head>
+<body>
+<div id="topBar" class="bar top-bar"></div>
+<div id="bottomBar" class="bar bottom-bar"></div>
+<svg class="interactive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+    <image id="reactorOff" href="/static/video/reactor0.jpg" height="1080" width="1920"/>
+    <image class="hoverable" x="230" y="350" href="/static/dfsec-logo-bw.svg" height="108" width="131" onclick="location='/?gl1tch'"/>
+</svg>
+<div class="modal-wrapper hidden" id="modalWrapper">
+    <div class="modal">
+        {% if glitch %}
+        {% include 'glitch.html' %}
+        {% else %}
+        <div class="modal-header">The reactor is turned off!</div>
+        <div class="modal-content">Let's connect to the reactor's control panel and see what we can do.</div>
+        <div class="modal-buttons">
+            <button onclick="closeModal()">Ok</button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</body>
+<script>
+
+    function openModal() {
+        modalWrapper.classList.remove('hidden')
+    }
+
+    function closeModal() {
+        location = 'control-panel'
+    }
+
+    openModal()
+</script>
+</html>

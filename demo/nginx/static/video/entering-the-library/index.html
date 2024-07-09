@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="wastelands.ico">
+    <meta charset="UTF-8">
+    <title>The library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="topBar" class="bar top-bar"></div>
+<div id="bottomBar" class="bar bottom-bar"></div>
+<div id="overlayTextWrapper" class="overlay-text-wrapper transparent">
+    <div id="overlayText" class="overlay-text transparent"></div>
+</div>
+<div class="modal-wrapper hidden" id="modalWrapper">
+    <div class="modal">
+        <div class="modal-header">The library</div>
+        <div class="modal-content">Your mission into the library is starting.</div>
+        <div class="modal-content"><label><input type="checkbox" id="useAudio" checked>Use audio</label></div>
+        <div class="modal-buttons">
+            <button onclick="closeModal()">Start</button>
+        </div>
+    </div>
+</div>
+<a id="skipLink" class="skip hidden" href="javascript:void(0)" onclick="skip()">Skip ></a>
+<audio id="audiobg">
+    <source src="entering-the-library.mp3" type="audio/mpeg">
+</audio>
+<audio id="audio1">
+    <source src="entering-the-library-1.wav" type="audio/mpeg">
+</audio>
+<audio id="audio2">
+    <source src="entering-the-library-2.wav" type="audio/mpeg">
+</audio>
+<audio id="audio3">
+    <source src="entering-the-library-3.wav" type="audio/mpeg">
+</audio>
+<audio id="audio4">
+    <source src="entering-the-library-4.wav" type="audio/mpeg">
+</audio>
+<audio id="audio5">
+    <source src="entering-the-library-5.wav" type="audio/mpeg">
+</audio>
+<audio id="audio6">
+    <source src="entering-the-library-6.wav" type="audio/mpeg">
+</audio>
+</body>
+</html>
+
+
+<script>
+    let nSkips = 0
+
+    function playSound(audio, volume = .6, loop = false) {
+        if (!useAudio.checked) {
+            return
+        }
+        audio.volume = volume
+        audio.loop = loop
+        audio.play()
+    }
+
+    function openModal() {
+        modalWrapper.classList.remove('hidden')
+    }
+
+    function closeModal() {
+        modalWrapper.classList.add('hidden')
+        animate()
+    }
+
+    function openFullscreen() {
+        if (document.body.requestFullscreen) {
+            document.body.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            document.body.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            document.body.msRequestFullscreen();
+        }
+    }
+
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+
+    async function startCinematic() {
+        openFullscreen()
+        await delay(1000)
+        topBar.classList.add('full-bar')
+        bottomBar.classList.add('full-bar')
+    }
+
+    async function stopCinematic() {
+        topBar.classList.remove('full-bar')
+        bottomBar.classList.remove('full-bar')
+        await delay(1000)
+        closeFullscreen()
+    }
+
+    async function animate() {
+        startCinematic()
+        playSound(audiobg, .2)
+        await delay(2000)
+        await showOverlayBackground()
+        showSkip()
+        playSound(audio1)
+        await displayText(4500, 'Alright, I\'m standing right outside this old government facility.')
+        playSound(audio2)
+        await displayText(6500, 'It\'s seen better days, but so have we all. I ain\'t here for a sightseeing tour though.')
+        playSound(audio3)
+        await displayText(8500, 'I\'m after something specific — some dusty old data that might just lead me to that damn island everyone\'s been whispering about.')
+        playSound(audio4)
+        await displayText(6500, 'You know, the one where we might actually have a shot at living without looking over our shoulders every second.')
+        playSound(audio5)
+        await displayText(4500, 'So, here I go, diving headfirst into this mess.')
+        playSound(audio6)
+        await displayText(6000, 'Wish me luck, \'cause I got a feeling I\'m gonna need it.')
+        await hideOverlayBackground()
+        hideSkip()
+        await delay(1000)
+        await stopCinematic()
+        await delay(1500)
+        location = '/library/'
+    }
+
+    async function showOverlayBackground() {
+        overlayTextWrapper.classList.remove('transparent')
+        await delay(2000)
+    }
+
+    async function hideOverlayBackground() {
+        overlayTextWrapper.classList.add('transparent')
+        await delay(2000)
+    }
+
+    function delay(t) {
+        return new Promise(resolve => setTimeout(resolve, t));
+    }
+
+    async function displayText(time, str) {
+        overlayText.innerText = str
+        overlayText.classList.remove('transparent')
+        await delay(time)
+        overlayText.classList.add('transparent')
+        await delay(2000)
+    }
+
+    openModal()
+
+    function skip() {
+        if (nSkips++ == 0) {
+            skipLink.innerText = 'I am heartless >'
+        } else {
+            location = '/library/'
+        }
+    }
+
+    function showSkip() {
+        skipLink.classList.remove('hidden')
+    }
+
+    function hideSkip() {
+        skipLink.classList.add('hidden')
+    }
+</script>

@@ -1,0 +1,3 @@
+<div style="text-align: justify;">
+A group of survivors created a hub to share information, maps and other stuff that has proven to be useful on many occasions. These survivors were driven away from their camp by some thugs: if we can manage to help them regain remote access to their servers I'm sure they will be more than willing to provide us with some help and maybe some information valuable for our mission.
+</div>
