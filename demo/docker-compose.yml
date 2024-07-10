@@ -8,18 +8,13 @@ services:
     pids_limit: 2000
     networks:
       - nginx
-    healthcheck:
-      test: wget --timeout 10 -S -O /dev/null http://localhost:3000/library/ 2>&1 | grep 200 >/dev/null || kill -9 $(ps aux | grep "/[a]pp/app.js" | awk '{ print $1; }')
-      interval: 10s
-      timeout: 15s
-      retries: 6
 
   nginx:
     build:
       context: nginx
     restart: always
     ports:
-      - "443:443"
+      - "8000:80"
       - "2222:2222"
     volumes:
       - ./letsencrypt:/etc/letsencrypt:ro
@@ -28,17 +23,6 @@ services:
     networks:
       - default
       - nginx
-
-
-  certbot:
-    container_name: certbot
-    image: certbot/dns-cloudflare
-    #command: certonly --non-interactive --dns-cloudflare --dns-cloudflare-propagation-seconds 30 --dns-cloudflare-credentials /opt/cloudflare/credentials --agree-tos --email security@interlogica.it -d 'interlogica.ninja' -d '*.interlogica.ninja'
-    command: renew
-    volumes:
-      - ./cloudflare:/opt/cloudflare
-      - ./letsencrypt:/etc/letsencrypt
-      - ./letsencrypt/log:/var/log/letsencrypt
 
 networks:
   nginx:

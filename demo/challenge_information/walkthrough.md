@@ -119,7 +119,7 @@ private_bits = [
 We got the PID! Now we can open the file we want to read:
 
 ```python
-with open('/admin/requests/<uuid>', 'r') as file:
+with open('/home/admin/requests/<uuid>', 'r') as file:
     print(file.read())
 ```
 Let's visit the url in the file now!

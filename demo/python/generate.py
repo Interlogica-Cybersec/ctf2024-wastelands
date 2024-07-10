@@ -12,7 +12,7 @@ if not os.path.exists(folder_path):
 num_files = 50
 
 # Frase da inserire all'interno dei file
-phrase = "\n\nHey there! \n\nLooks like you're trying to access some top-secret data.\n\nThe funny thing is, all the administrators (our dear Dave included) have been gone for ages! So, it seems like you're an intruder.\n\nInitiating threat removal procedure... Please wait and stand still!\n\nhttps://ctfdemo.interlogica.ninja/video/security-countermeasures-activated/\n\n"
+phrase = "\n\nHey there! \n\nLooks like you're trying to access some top-secret data.\n\nThe funny thing is, all the administrators (our dear Dave included) have been gone for ages! So, it seems like you're an intruder.\n\nInitiating threat removal procedure... Please wait and stand still!\n\nhttp://127.0.0.1:8000/video/security-countermeasures-activated/\n\n"
 
 # Creazione dei file
 for i in range(num_files):

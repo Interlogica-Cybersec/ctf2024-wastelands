@@ -1,9 +1,0 @@
-version: '3.8'
-services:
-  flask_app:
-    image: prequel
-    build: .
-    ports:
-      - "5000:5000"
-    read_only: true
-    

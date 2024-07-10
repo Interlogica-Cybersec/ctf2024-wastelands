@@ -297,6 +297,8 @@ class DebuggedApplication:
         else:
             self.pin = None
 
+        self.trusted_hosts: list[str] = []
+
     @property
     def pin(self) -> str | None:
         if not hasattr(self, "_pin"):

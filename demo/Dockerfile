@@ -1,4 +1,4 @@
-FROM python:3.10.14-alpine
+FROM python:3.10.14-alpine3.18
 RUN pip install flask
 RUN apk add --update npm
 RUN apk add --update openssh
