@@ -1,4 +1,2 @@
-<div style="text-align: justify;">We breached an ESAP complex and discovered a bunch of rundown robots. Seeing their potential, we decided to repair them and use them to defend our base or attack our enemies. Time to get to work and see what these robots can do!
-<br>
+We breached an ESAP complex and discovered a bunch of rundown robots. Seeing their potential, we decided to repair them and use them to defend our base or attack our enemies. Time to get to work and see what these robots can do!
 The second robot, the one with "warmachine" stamped on its left leg, is just like the first one but with weapons. It also has a set of infrasonic sensors that might help us find hidden underground rooms lost under the rubble. Maybe then we can put our hands on something interesting that nobody managed to steal before us. That is IF we manage to get this robot to work AND avoid being blown up by it by accident!
-</div>

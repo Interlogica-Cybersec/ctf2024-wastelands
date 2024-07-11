@@ -1,1 +1,2 @@
-<div style="text-align: justify;">This device gives us direct access to GovGPT, the AI that wiped out our world 50 years ago... and now it's the only thing that might give us some tips on how to find that blessed island.<br>Too bad it keeps saying unauthorized. You wanna give it a shot? Or should I?</div>
+This device gives us direct access to GovGPT, the AI that wiped out our world 50 years ago... and now it's the only thing that might give us some tips on how to find that blessed island.
+Too bad it keeps saying unauthorized. You wanna give it a shot? Or should I?

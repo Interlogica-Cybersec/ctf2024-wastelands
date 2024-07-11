@@ -1,4 +1,2 @@
-<div style="text-align: justify;">We breached an ESAP complex and discovered a bunch of rundown robots. Seeing their potential, we decided to repair them and use them to defend our base or attack our enemies. Time to get to work and see what these robots can do!
-<br>
+We breached an ESAP complex and discovered a bunch of rundown robots. Seeing their potential, we decided to repair them and use them to defend our base or attack our enemies. Time to get to work and see what these robots can do!
 The third robot is a prototype of a secret project for the ultimate mech. It has "wartank" impressed on its crawlers. If we manage to win over its unorthodox start up process, we can get it to blast the rubble off the entrance to the underground floor of the building just south of this one, where the research laboratories were apparently located.
-</div>
