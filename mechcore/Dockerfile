@@ -15,7 +15,8 @@ RUN useradd -m mechcore && \
     echo "mechcore:mechcore" | chpasswd 
 
 # Copy startup.py to the home directory of user mechcore
-COPY --chmod=555 startup.py /home/mechcore/startup.py
+COPY startup.py /home/mechcore/startup.py
+RUN chmod 555 /home/mechcore/startup.py
 COPY modules /home/mechcore/modules
 
 # Set ownership to mechcore user and group
@@ -49,7 +50,8 @@ COPY banner /etc/ssh/banner
 COPY sshd_config /etc/ssh/sshd_config
 
 # GLITCH
-COPY --chmod=644 glitch.txt /home/mechcore/glitch.txt
+COPY glitch.txt /home/mechcore/glitch.txt
+RUN chmod 644 /home/mechcore/glitch.txt
 
 
 # Start SSH service with bash shell

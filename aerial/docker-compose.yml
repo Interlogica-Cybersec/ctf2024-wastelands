@@ -4,8 +4,6 @@ services:
   interface_subsystem:
     build:
       context: interface_subsystem
-#    volumes:
-#      - ./interface_subsystem/html:/var/www/html
     depends_on:
       - data_subsystem
       - security_subsystem
@@ -15,8 +13,6 @@ services:
   security_subsystem:
     build:
       context: security_subsystem
-#    volumes:
-#      - ./security_subsystem/html:/var/www/html
     depends_on:
       - data_subsystem
     networks:
@@ -30,15 +26,12 @@ services:
       MYSQL_USER: kestrel
       MYSQL_PASSWORD: 856a0e059c03
       MYSQL_DATABASE: sensors
-#    volumes:
-#      - ./data_subsystem/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - nginx
 
   nginx:
     build:
       context: nginx
-    restart: always
     ports:
       - "9085:80"
       - "2235:22"

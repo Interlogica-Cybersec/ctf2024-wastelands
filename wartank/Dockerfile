@@ -15,9 +15,11 @@ RUN useradd -m wartank && \
     echo "wartank:wartank" | chpasswd 
 
 # Copy startup.py to the home directory of user wartank
-COPY --chmod=555 startup.py /home/wartank/startup.py
+COPY startup.py /home/wartank/startup.py
+RUN chmod 555 /home/wartank/startup.py
 COPY modules /home/wartank/modules
-COPY --chmod=555 killenemies /usr/local/bin/killenemies
+COPY killenemies /usr/local/bin/killenemies
+RUN chmod 555 /usr/local/bin/killenemies
 
 # Set ownership to wartank user and group
 RUN chown -R root:root /home/wartank

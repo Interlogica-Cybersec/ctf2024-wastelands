@@ -11,7 +11,8 @@ RUN chown -R factory:factory /home/factory/.ssh && chmod 600 /home/factory/.ssh/
 COPY ./factory_reset.sh /home/factory/factory_reset.sh
 RUN chown factory:factory /home/factory/factory_reset.sh
 RUN chmod +x /home/factory/factory_reset.sh
-COPY --chmod=644 ./custom.cnf /etc/mysql/conf.d/custom.cnf
+COPY ./custom.cnf /etc/mysql/conf.d/custom.cnf
+RUN chmod 644 /etc/mysql/conf.d/custom.cnf
 COPY ./init.sql /docker-entrypoint-initdb.d/init.sql
 COPY ./start.sh /start.sh
 RUN chmod +x /start.sh

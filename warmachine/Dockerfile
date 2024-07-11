@@ -15,9 +15,11 @@ RUN useradd -m warmachine && \
     echo "warmachine:warmachine" | chpasswd 
 
 # Copy startup.py to the home directory of user warmachine
-COPY --chmod=555 startup.py /home/warmachine/startup.py
+COPY startup.py /home/warmachine/startup.py
+RUN chmod 555 /home/warmachine/startup.py
 COPY modules /home/warmachine/modules
-COPY --chmod=555 killenemies /usr/local/bin/killenemies
+COPY killenemies /usr/local/bin/killenemies
+RUN chmod 555 /usr/local/bin/killenemies
 
 # Set ownership to warmachine user and group
 RUN chown -R root:root /home/warmachine
